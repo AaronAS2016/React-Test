@@ -11,7 +11,7 @@ module.exports = (env) => {
   return {
 
     entry: {
-      "react-test": path.resolve(__dirname, 'index.js'),
+      "home": path.resolve(__dirname, 'src/entries/home.js'),
     },
     output: {
       path: path.resolve(__dirname, 'dist'),

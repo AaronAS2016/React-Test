@@ -1,6 +1,9 @@
 import React from 'react';
 import {render} from 'react-dom';
-import Media from './src/playlist/components/media';
+import Home from '../pages/containers/home';
+
+import data from '../api.json';
+
 
 const container = document.getElementById("app");
 
@@ -16,4 +19,4 @@ const container = document.getElementById("app");
  * La etiqueta puede reciber propiedades que se pueden obtener desde los componentes
  * 
  */
-render(<Media title="Titulo personalizado" author="Aaron Saban" image="./images/fuego-artificial.jpg"/>, container)
+render(<Home data={data} />, container)

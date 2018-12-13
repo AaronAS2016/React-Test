@@ -1,5 +1,6 @@
 import React from 'react'
 import PlayList from '../../playlist/components/playlist';
+import './categories.css';
 
 function Category(props){
     return(
@@ -9,6 +10,7 @@ function Category(props){
         
         <PlayList 
             playlist={props.playlist}
+            handleToggleModal={props.handleToggleModal}
         />
 
         </div>

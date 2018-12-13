@@ -10,7 +10,7 @@ function Playlist(props){
                 {
                     props.playlist.map((item)=>{
                         //return <Media key={item.id} title={item.title} author={item.author} image={item.image}/>
-                        return <Media key={item.id} {...item}/>
+                        return <Media handleClick = {props.handleToggleModal} key={item.id} {...item}/>
                     })
                 }
             </div>

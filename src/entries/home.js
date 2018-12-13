@@ -5,7 +5,7 @@ import Home from '../pages/containers/home';
 import data from '../api.json';
 
 
-const container = document.getElementById("app");
+const homeContainer = document.getElementById("home-container");
 
 /**
  * Tipos de componentes
@@ -19,4 +19,4 @@ const container = document.getElementById("app");
  * La etiqueta puede reciber propiedades que se pueden obtener desde los componentes
  * 
  */
-render(<Home data={data} />, container)
+render(<Home data={data} />, homeContainer)

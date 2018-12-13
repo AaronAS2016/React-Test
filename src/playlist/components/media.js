@@ -31,19 +31,14 @@ class Media extends PureComponent {
 
     /**Las propiedades no pueden mutar pero si puede ir mutando el estado del componente */
 
-    handleClick = (event) =>{
-        this.setState({
-            author: 'Pepe'
-        })
-    }
-
+  
 
     
     render(){
         
         let {title, author, cover} = this.state;
         return(
-            <div className="Media" onClick={this.handleClick}>
+            <div className="Media" onClick={this.props.handleClick}>
                 <div className= "Media-Card">
                     <img className="img" src={cover}></img>
                     <h3 className="Media-title">{title}</h3>

@@ -13,6 +13,7 @@ module.exports = {
     devServer:{
         port: 8080
     },
+    devtool: 'eval-source-map',
     module:{
         rules: [
             /* Aqui iran los loaders  */

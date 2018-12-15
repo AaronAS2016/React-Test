@@ -1,9 +1,11 @@
 import React from 'react'
 import Category from './category'
+import SearchContainer from '../../widgets/containers/search';
 
 function Categories(props){
     return(
-        <div>
+        <div className="Categories">
+            <SearchContainer/>
             {
                 props.categories.map((item) =>{
                     return <Category key={item.id} {...item} handleToggleModal = {props.handleToggleModal} />

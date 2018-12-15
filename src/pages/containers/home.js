@@ -3,8 +3,8 @@ import HomeLayout from '../components/home-layout';
 import Categories from '../../categories/components/categories';
 import ModalContainer from '../../widgets/containers/modal'
 import Modal from '../../widgets/components/modal';
-import handleError from '../../error/containers/handle-error';
 import HandleError from '../../error/containers/handle-error';
+import VideoPlayer from '../../player/containers/video-player';
 
 class Home extends Component{
 
@@ -22,6 +22,9 @@ class Home extends Component{
         return(
             <HandleError>
                 <HomeLayout>
+                    <VideoPlayer
+                        autoplay
+                    />
                     <Categories categories={this.props.data.categories} handleToggleModal = {this.handleToggleModal} />
                     {
                         this.state.modalVisible &&

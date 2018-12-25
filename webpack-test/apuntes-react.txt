@@ -23,3 +23,52 @@ La única forma de modificar el estado es emitiendo una acción, un objeto que d
 Los reduces son funciones puras que toman el estado anterior y una acción, y devuelven un nuevo estado.
 
 Redux debe utilizarse de una manera responsable, para no caer en el error de aplicar sobre ingeniería (exceso de complejidad) a tus aplicaciones sencillas … eso sería contraproducente a lo que intenta resolver Redux.
+
+
+Entendiendo y agregando un Store
+Store = Es la parte más importante de entender cuando estamos haciendo algo en Redux.
+
+Datos importantes del Store:
+
+Contiene el estado de la aplicación.
+Se puede acceder al estado con el método getState()
+Se puede actualizar el estado con el método dispatch(action)
+Escucha cambios con el método **subscribe(listener)
+Deja de escuchar cambios retornando la función del método subscribe(listener)
+
+Action = Bloque de información que envía datos a la aplicación.
+
+Datos importantes:
+
+Se envían usando el método dispatch() del store.
+Son la única fuente de información del store.
+Son objetos planos de JavaScript.
+
+
+
+Reducer
+
+Modifican nuestro estado
+Puede haber múltiples reducers en la aplicación y un solo store.
+Devuelve el siguiente estado.
+Que no deben hacer
+
+Modificar los argumentos recibidos
+Llamar a APIs (u otras tareas secundarias)
+Llamar a funciones no puras como Date.now(), Math.random()
+<h1>Funciones puras</h1>
+Es un concepto de programación funcional, hace que el código sea más legible. Tienen las siguientes condiciones:
+Dados los mismos datos de entrada, deben retornar el mismo resultado sin importar el número de veces que se llame.
+No debe tener objetos secundarios.
+El reducer se iguala a una función, esta función recibe dos parámetros que son el state y la action y en la función se debe definir que se hace con state y action; generalmente se valida con un switch.
+
+
+Resume del flujo de eventos
+
+Se establece un State (estado) inicial con el que se crea originalmente el store mediante el método createStore de redux
+el state inicial define los contenidos que se muestran en la UI mediante store.getState() y la función render()
+mediante los elementos de la UI se dispara un evento que se captura mediante un listener (como onsubmit) y que invoca al store.dispatch() con una acción específica …
+el Reducer recibe la acción(type y payload) enviada mediante el store.dispatch() y genera un nuevo estado que remplazará al estado inicial (o anterior)
+el cambio del estado es detectado por el store y se ejecuta store.subscribe(handle) … con la función (handle) que manejará lo que sucede cuando ha cambiado el estado
+en la función (handle) recibida por store.subscribe(handle) se invoca la actualización de la UI a partir del nuevo estado creado
+queda establecido el nuevo estado(state) y queda de nuevo atento el evento (listener) en la UI

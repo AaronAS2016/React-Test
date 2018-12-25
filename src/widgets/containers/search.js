@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Search from '../components/search';
+import { connect } from 'react-redux'
+
 class SearchContainer extends Component {
     state = {
         value : ''
@@ -7,13 +9,15 @@ class SearchContainer extends Component {
     handleSubmit = event =>{
         event.preventDefault();
         console.log(`%c ${this.state.value}`, `background: #f2f2f2; color: #ff0000; border-radius: 5px; font-size: 32px; margin-left:0; font-family: Roboto;`);
-        
-        this.setState({
-            value:  ''
+
+        this.props.dispatch({
+            type: 'SEARCH_VIDEO',
+            payload: {
+                query: this.state.value
+            }
         })
-        
+
     }
-    
     setInputRef = element => {
         this.input = element;
     }
@@ -37,4 +41,4 @@ class SearchContainer extends Component {
     }
 }
 
-export default SearchContainer;
+export default connect()(SearchContainer);

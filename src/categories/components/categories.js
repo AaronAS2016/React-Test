@@ -1,11 +1,17 @@
 import React from 'react'
 import Category from './category'
-import SearchContainer from '../../widgets/containers/search';
+import Search from '../../widgets/containers/search';
+import Media from '../../playlist/components/media'
 
 function Categories(props){
     return(
         <div className="Categories">
-            <SearchContainer/>
+            <Search/>
+            {
+                props.search.map((item) => {
+                    return <Media {...item} key={item.id}/>
+                })
+            }
             {
                 props.categories.map((item) =>{
                     return <Category key={item.id} {...item} handleToggleModal = {props.handleToggleModal} />

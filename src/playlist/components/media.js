@@ -4,7 +4,7 @@ import './media.css';
 
 
 class Media extends PureComponent {
-    
+
     /**JSX: Sintaxis para crear elementos dentro de REACT
      * render(): Se ejecuta cuando es instanciada la clase
      */
@@ -13,7 +13,7 @@ class Media extends PureComponent {
     state = {
         author = 'Aaron'
     }*/
-    
+
     constructor(props){
         super(props)
         this.state = {
@@ -22,23 +22,23 @@ class Media extends PureComponent {
             title: props.title
         }
     }
-    
-    /*handleClick(event){
-        console.log(this.props.title)
-    }*/
+
+    handleClick = event =>{
+       this.props.openModal(this.props)
+    }
 
     /**ventaja de ES7  para no andar bindeando cada funcion del componente en el constructor*/
 
-    /**Las propiedades no pueden mutar pero si puede ir mutando el estado del componente */
+    /**Las propiedades no pueden mutar pero| si puede ir mutando el estado del componente */
 
-  
 
-    
+
+
     render(){
-        
+
         let {title, author, cover} = this.state;
         return(
-            <div className="Media" onClick={this.props.handleClick}>
+            <div className="Media" onClick={this.handleClick}>
                 <div className= "Media-Card">
                     <img className="img" src={cover}></img>
                     <h3 className="Media-title">{title}</h3>

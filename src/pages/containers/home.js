@@ -6,31 +6,31 @@ import Modal from '../../widgets/components/modal';
 import HandleError from '../../error/containers/handle-error';
 import VideoPlayer from '../../player/containers/video-player';
 import { connect } from 'react-redux'
+import {List as list} from 'immutable'
+import * as actions from '../../actions/index'
+import { bindActionCreators } from 'redux'
 
 class Home extends Component{
 
-    state = {
-        modalVisible: false
+    handleOpenModal = (id) =>{
+        this.props.actions.openModal(id)
     }
 
-    handleToggleModal = (media) =>{
-        this.setState({
-            modalVisible: !this.state.modalVisible,
-            media
-        })
+
+    handleCloseModal = () =>{
+        this.props.actions.closeModal()
     }
 
     render(){
-        console.log(this.props)
         return(
             <HandleError>
                 <HomeLayout>
-                    <Categories categories={this.props.categories} handleToggleModal = {this.handleToggleModal} search={this.props.search}/>
+                    <Categories categories={this.props.categories} handleOpenModal = {this.handleOpenModal} search={this.props.search} isLoading={this.props.isLoading}/>
                     {
-                        this.state.modalVisible &&
+                        this.props.modal.get('visibility') &&
                         <ModalContainer>
-                            <Modal handleClick = {this.handleToggleModal}>
-                                <VideoPlayer autoplay src={this.state.media.src} title={this.state.media.title}/>
+                            <Modal handleClick = {this.handleCloseModal}>
+                                <VideoPlayer autoplay id={this.props.modal.get('mediaId')}/>
                             </Modal>
                         </ModalContainer>
                     }
@@ -42,15 +42,35 @@ class Home extends Component{
 }
 const mapStateToProps = (state, props) => {
 
-    const categories = state.data.categories.map((categoryId) =>{
-        return state.data.entities.categories[categoryId]
+    const categories = state.get('data').get('categories').map((categoryId) =>{
+        return state.get('data').get('entities').get('categories').get(categoryId)
     })
+
+    let searchResults = list()
+    const search = state.get('data').get('search')
+
+    if(search){
+        const mediaList = state.get('data').get('entities').get('media')
+        searchResults = mediaList.filter((item)=> (
+            item.get('author').toLowerCase().includes(search.toLowerCase())
+        )).toList()
+    }
+
     return {
         categories,
-        search: state.search
-      }
+        search: searchResults,
+        modal: state.get('modal'),
+        isLoading: state.get('isLoading').get('active')
+    }
 }
-export default connect(mapStateToProps)(Home)
+
+const mapDispatchToProps = dispatch => {
+    return {
+        // actions: bindActionCreators(acctiones, dispatch)
+        actions: bindActionCreators(actions, dispatch)
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
 /**Se cambia el export por: export default connect(mapStateToProps)(Component)
 

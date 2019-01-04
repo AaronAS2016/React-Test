@@ -24,7 +24,7 @@ class Media extends PureComponent {
     }
 
     handleClick = event =>{
-       this.props.openModal(this.props)
+       this.props.openModal(this.props.id)
     }
 
     /**ventaja de ES7  para no andar bindeando cada funcion del componente en el constructor*/

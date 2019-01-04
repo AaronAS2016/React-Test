@@ -6,26 +6,45 @@ import Home from '../pages/containers/home';
 
 import { Provider } from 'react-redux'
 
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 
-import reducer from '../reducers/data'
+import reducer from '../reducers/index'
 
-import data from '../schemas/index'
+import { Map as map} from 'immutable'
 
-const initialState = {
-    data: {
-        // ...data,
-        entities: data.entities,
-        categories: data.result.categories
-    },
-    search: []
-}
+import { logger } from 'redux-logger'
+import { composeWithDevTools } from 'redux-devtools-extension'
+
+import thunk from 'redux-thunk'
+
+// const logger = ({getState, dispatch}) => next => action => {
+//     console.log('vamos a enviar esta acción', action)
+//     const value = next(action)
+//     console.table(getState().toJS())
+//     return value
+// }
+
+// const initialState = {
+//     data: {
+//         // ...data,
+//         entities: data.entities,
+//         categories: data.result.categories,
+//         search: [],
+//     },
+//     modal:{
+//         visibility: false,
+//         mediaId: null,
+//     }
+// }
 
 
 const store = createStore(
     reducer,
-    initialState,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+    map(),
+    composeWithDevTools(
+        applyMiddleware(logger, thunk)
+    )
+    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 )
 
 
